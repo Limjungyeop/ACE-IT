@@ -4,4 +4,21 @@ plugins {
     id 'com.android.library' version '8.0.2' apply false
     id 'com.google.gms.google-services' version '4.3.15' apply false
     id 'org.jetbrains.kotlin.android' version '1.9.0' apply false
+    id 'org.jetbrains.kotlin.jvm' version '1.9.0'
+}
+repositories {
+    mavenCentral()
+}
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+}
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
