@@ -1,61 +1,38 @@
-package com.example.myapplication;
+package com.example.myapplication
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.content.Intent
+import android.os.Bundle
+import android.view.View
+import android.widget.ImageButton
+import androidx.appcompat.app.AppCompatActivity
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageButton;
-
-public class Menu extends AppCompatActivity {
-
-    ImageButton storybutton;
-    ImageButton playbutton;
-    ImageButton bookbutton;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu);
-
-        storybutton = (ImageButton) findViewById(R.id.storybutton);
-        playbutton = (ImageButton) findViewById(R.id.playbutton);
-        bookbutton = (ImageButton) findViewById(R.id.bookbutton);
-
-        storybutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openComicPage1();
-            }
-        });
-
-        playbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openQuiz();
-            }
-        });
-
-        bookbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openInfoPage1();
-            }
-        });
+class Menu : AppCompatActivity() {
+    var storybutton: ImageButton? = null
+    var playbutton: ImageButton? = null
+    var bookbutton: ImageButton? = null
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_menu)
+        storybutton = findViewById<View>(R.id.storybutton) as ImageButton
+        playbutton = findViewById<View>(R.id.playbutton) as ImageButton
+        bookbutton = findViewById<View>(R.id.bookbutton) as ImageButton
+        storybutton!!.setOnClickListener { openComicPage1() }
+        playbutton!!.setOnClickListener { openQuiz() }
+        bookbutton!!.setOnClickListener { openInfoPage1() }
     }
 
-    public void openComicPage1(){
-        Intent comicpage1 = new Intent(this, ComicPage1.class);
-        startActivity(comicpage1);
+    fun openComicPage1() {
+        val comicpage1 = Intent(this, ComicPage1::class.java)
+        startActivity(comicpage1)
     }
 
-    public void openQuiz(){
-        Intent quiz = new Intent(this, Quiz.class);
-        startActivity(quiz);
+    fun openQuiz() {
+        val quiz = Intent(this, Quiz::class.java)
+        startActivity(quiz)
     }
 
-    public void openInfoPage1(){
-        Intent infopage1 = new Intent(this, InfoPage1.class);
-        startActivity(infopage1);
+    fun openInfoPage1() {
+        val infopage1 = Intent(this, InfoPage1::class.java)
+        startActivity(infopage1)
     }
 }
