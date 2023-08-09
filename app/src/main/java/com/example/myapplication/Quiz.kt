@@ -41,6 +41,8 @@ class Quiz : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz)
+
+
         fun openComicPage1() {
             val Menu = Intent(this, Menu::class.java)
             startActivity(Menu)

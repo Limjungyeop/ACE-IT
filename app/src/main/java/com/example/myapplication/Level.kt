@@ -21,12 +21,7 @@ class Level : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_level)
-//        close_button = findViewById<View>(R.id.close_button) as ImageButton
-//        close_button!!.setOnClickListener { openMenu() }
-//        fun openMenu() {
-//            val menu1 = Intent(this, ComicPage1::class.java)
-//            startActivity(menu1)
-//        }
+
         close_button = findViewById(R.id.close_button)
         close_button!!.setOnClickListener {
                 val menu1 = Intent(this, Menu::class.java)
@@ -42,11 +37,12 @@ class Level : AppCompatActivity() {
 
         levelButton1.setOnClickListener {
             if (userLevel < 1){
-                Toast.makeText(this, "Invalid level selection", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Must Finish Previous Levels", Toast.LENGTH_SHORT).show()
             } else {
                 val quiz = Intent(this, Quiz::class.java)
                 quiz.putExtra("quiz_level", 1)
                 startActivity(quiz)
+
             }
         }
 
@@ -55,7 +51,7 @@ class Level : AppCompatActivity() {
 
         levelButton2.setOnClickListener {
             if (userLevel < 2){
-                Toast.makeText(this, "Invalid level selection", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Must Finish Previous Levels", Toast.LENGTH_SHORT).show()
             } else {
                 val quiz = Intent(this, Quiz::class.java)
                 quiz.putExtra("quiz_level", 2)
@@ -67,7 +63,7 @@ class Level : AppCompatActivity() {
 
         levelButton3.setOnClickListener {
             if (userLevel < 3){
-                Toast.makeText(this, "Invalid level selection", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Must Finish Previous Levels", Toast.LENGTH_SHORT).show()
             } else {
                 val quiz = Intent(this, Quiz::class.java)
                 quiz.putExtra("quiz_level", 3)
@@ -79,7 +75,7 @@ class Level : AppCompatActivity() {
 
         levelButton4.setOnClickListener {
             if (userLevel < 4){
-                Toast.makeText(this, "Invalid level selection", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Must Finish Previous Levels", Toast.LENGTH_SHORT).show()
             } else {
                 val quiz = Intent(this, Quiz::class.java)
                 quiz.putExtra("quiz_level", 4)
@@ -91,7 +87,7 @@ class Level : AppCompatActivity() {
 
         levelButton5.setOnClickListener {
             if (userLevel < 5){
-                Toast.makeText(this, "Invalid level selection", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Must Finish Previous Levels", Toast.LENGTH_SHORT).show()
             } else {
                 val quiz = Intent(this, Quiz::class.java)
                 quiz.putExtra("quiz_level", 5)

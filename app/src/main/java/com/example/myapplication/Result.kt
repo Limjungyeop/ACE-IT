@@ -10,12 +10,12 @@ import android.widget.ImageButton
 import android.widget.TextView
 
 class Result : AppCompatActivity() {
+    private lateinit var nextButton: ImageButton
+    private lateinit var totalScoreText: TextView
     private lateinit var scoreText: TextView
     private lateinit var resultMessage: TextView
     private lateinit var homeButton2: ImageButton
     private lateinit var retryButton: ImageButton
-    private lateinit var nextButton: ImageButton
-    private lateinit var totalScoreText: TextView
     private var score: Int = 0
     private var totalscore: Int = 0
 

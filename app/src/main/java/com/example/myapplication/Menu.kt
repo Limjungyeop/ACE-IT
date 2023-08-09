@@ -7,12 +7,19 @@ import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 
 class Menu : AppCompatActivity() {
+    var question_button: ImageButton? = null
     var storybutton: ImageButton? = null
     var playbutton: ImageButton? = null
     var bookbutton: ImageButton? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
+
+        question_button = findViewById(R.id.question_button)
+        question_button!!.setOnClickListener {
+            val question = Intent(this, Menu::class.java)
+            startActivity(question)
+        }
 
         bookbutton = findViewById<View>(R.id.bookbutton) as ImageButton
         storybutton = findViewById<View>(R.id.storybutton) as ImageButton

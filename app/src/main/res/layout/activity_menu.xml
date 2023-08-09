@@ -46,4 +46,16 @@
         app:layout_constraintStart_toEndOf="@+id/storybutton"
         app:layout_constraintTop_toBottomOf="@+id/playbutton"
         app:srcCompat="@drawable/bookbutton" />
+
+    <ImageButton
+        android:id="@+id/question_button"
+        android:layout_width="63dp"
+        android:layout_height="83dp"
+        android:layout_marginTop="156dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:scaleType="fitCenter"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/playbutton"
+        app:srcCompat="@drawable/question" />
 </androidx.constraintlayout.widget.ConstraintLayout>
