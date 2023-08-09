@@ -11,10 +11,16 @@ class Menu : AppCompatActivity() {
     var storybutton: ImageButton? = null
     var playbutton: ImageButton? = null
     var bookbutton: ImageButton? = null
+    var infobutton: ImageButton? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
 
+        infobutton = findViewById(R.id.infoButton)
+        infobutton!!.setOnClickListener {
+            val openinfopage = Intent(this, Newinfopage::class.java)
+            startActivity(openinfopage)
+        }
         question_button = findViewById(R.id.question_button)
         question_button!!.setOnClickListener {
             val question = Intent(this, Menu::class.java)

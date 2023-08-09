@@ -6,10 +6,13 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 
 class Result : AppCompatActivity() {
+    var explaination_button: Button? = null
+
     private lateinit var nextButton: ImageButton
     private lateinit var totalScoreText: TextView
     private lateinit var scoreText: TextView
@@ -23,6 +26,11 @@ class Result : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result)
 
+        explaination_button = findViewById(R.id.explaination_btn)
+        explaination_button!!.setOnClickListener {
+            val openexplaination = Intent(this, Explaination::class.java)
+            startActivity(openexplaination)
+        }
         val intent = intent
 
         // 결과 표시
