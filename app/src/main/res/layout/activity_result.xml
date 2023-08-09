@@ -103,13 +103,11 @@
         app:srcCompat="@drawable/retry_button" />
 
     <Button
-        android:id="@+id/explaination_btn"
+        android:id="@+id/explanationButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="300dp"
-        app:layout_constraintRight_toRightOf="parent"
+        android:text="Explanation"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:text="explaination" />
+        app:layout_constraintLeft_toLeftOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

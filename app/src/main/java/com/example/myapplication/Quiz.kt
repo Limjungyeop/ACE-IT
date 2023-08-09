@@ -132,6 +132,7 @@ class Quiz : AppCompatActivity() {
                     resultPage.putExtra("result_message", "GREAT JOB!")
                     resultPage.putExtra("score", currentScore)
 
+                    stopTimer()
                     startActivity(resultPage)
                 }
             }
@@ -160,6 +161,9 @@ class Quiz : AppCompatActivity() {
         }.start()
     }
 
+    private fun stopTimer() {
+        countDownTimer?.cancel()
+    }
     private fun checkAnswer() {
 //        countDownTimer.cancel() // 타이머 중지
 
@@ -209,6 +213,7 @@ class Quiz : AppCompatActivity() {
                 // 여기서 하트가 모두 소진되면 게임 오버 등의 동작 추가 가능
                 val resultPage = Intent(this@Quiz, Result::class.java)
                 resultPage.putExtra("result_message", "TRY AGAIN")
+                stopTimer()
                 startActivity(resultPage)
             }
         }

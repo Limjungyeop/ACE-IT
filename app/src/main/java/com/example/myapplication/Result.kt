@@ -11,21 +11,19 @@ import android.widget.ImageButton
 import android.widget.TextView
 
 class Result : AppCompatActivity() {
-
-
     private lateinit var nextButton: ImageButton
     private lateinit var totalScoreText: TextView
     private lateinit var scoreText: TextView
     private lateinit var resultMessage: TextView
     private lateinit var homeButton2: ImageButton
     private lateinit var retryButton: ImageButton
+    private lateinit var explanationButton: Button
     private var score: Int = 0
     private var totalscore: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result)
-
 
         val intent = intent
 
@@ -80,6 +78,11 @@ class Result : AppCompatActivity() {
             startActivity(Intent(this, Level::class.java))
         }
 
+        //next 버튼
+        explanationButton = findViewById(R.id.explanationButton)
+        explanationButton.setOnClickListener {
+            startActivity(Intent(this, Explanation::class.java))
+        }
 
 
     }
