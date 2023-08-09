@@ -20,6 +20,7 @@
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/playbutton"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/storybutton" />
 
     <ImageButton
@@ -48,23 +49,11 @@
         app:srcCompat="@drawable/bookbutton" />
 
     <ImageButton
-        android:id="@+id/question_button"
-        android:layout_width="63dp"
-        android:layout_height="83dp"
-        android:layout_marginTop="156dp"
-        android:background="?android:attr/selectableItemBackground"
-        android:scaleType="fitCenter"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/playbutton"
-        app:srcCompat="@drawable/question" />
-
-    <ImageButton
         android:id="@+id/infoButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="284dp"
-        android:layout_marginBottom="572dp"
+        android:layout_marginStart="188dp"
+        android:layout_marginBottom="168dp"
         android:background="?android:attr/selectableItemBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

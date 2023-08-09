@@ -7,7 +7,6 @@ import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 
 class Menu : AppCompatActivity() {
-    var question_button: ImageButton? = null
     var storybutton: ImageButton? = null
     var playbutton: ImageButton? = null
     var bookbutton: ImageButton? = null
@@ -20,11 +19,6 @@ class Menu : AppCompatActivity() {
         infobutton!!.setOnClickListener {
             val openinfopage = Intent(this, Newinfopage::class.java)
             startActivity(openinfopage)
-        }
-        question_button = findViewById(R.id.question_button)
-        question_button!!.setOnClickListener {
-            val question = Intent(this, Menu::class.java)
-            startActivity(question)
         }
 
         bookbutton = findViewById<View>(R.id.bookbutton) as ImageButton
