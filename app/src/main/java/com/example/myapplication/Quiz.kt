@@ -136,6 +136,7 @@ class Quiz : AppCompatActivity() {
                     val resultPage = Intent(this@Quiz, Result::class.java)
                     resultPage.putExtra("result_message", "GREAT JOB!")
                     resultPage.putExtra("score", currentScore)
+                    resultPage.putExtra("quiz_level", currentLevelIndex-1)
 
                     stopTimer()
                     startActivity(resultPage)
@@ -161,6 +162,7 @@ class Quiz : AppCompatActivity() {
                 // 스코어 결과 문구 전달
                 val resultPage = Intent(this@Quiz, Result::class.java)
                 resultPage.putExtra("result_message", "Try again")
+                resultPage.putExtra("quiz_level", currentLevelIndex)
                 startActivity(resultPage)
             }
         }.start()
@@ -218,6 +220,7 @@ class Quiz : AppCompatActivity() {
                 // 여기서 하트가 모두 소진되면 게임 오버 등의 동작 추가 가능
                 val resultPage = Intent(this@Quiz, Result::class.java)
                 resultPage.putExtra("result_message", "TRY AGAIN")
+                resultPage.putExtra("quiz_level", currentLevelIndex)
                 stopTimer()
                 startActivity(resultPage)
             }

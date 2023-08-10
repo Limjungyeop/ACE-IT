@@ -18,6 +18,8 @@ class Result : AppCompatActivity() {
     private lateinit var homeButton2: ImageButton
     private lateinit var retryButton: ImageButton
     private lateinit var explanationButton: Button
+
+    private var currentLevel: Int = 1 // 현재 레벨
     private var score: Int = 0
     private var totalscore: Int = 0
 
@@ -30,7 +32,6 @@ class Result : AppCompatActivity() {
         // 결과 표시
         val result : String? = intent.extras?.getString("result_message")
         if(result != null){
-//            Log.d("jylimps", result)
             resultMessage = findViewById(R.id.resultMessage)
             resultMessage.text = result
         }
@@ -38,10 +39,13 @@ class Result : AppCompatActivity() {
         //스코어 표시
         score = intent.extras!!.getInt("score")
         if(score != null){
-//            Log.d("jylimps", score)
             scoreText = findViewById(R.id.scoreText)
             scoreText.text = score.toString()
         }
+
+        //Level
+        currentLevel = intent.extras!!.getInt("quiz_level")
+
 
         // 저장된 total스코어 불러오기
         val sharedPreferences1 = getSharedPreferences("app_user", Context.MODE_PRIVATE)
@@ -69,7 +73,11 @@ class Result : AppCompatActivity() {
         retryButton = findViewById(R.id.retryButton)
 
         retryButton.setOnClickListener {
-            startActivity(Intent(this, Quiz::class.java))
+
+            val quiz = Intent(this, Quiz::class.java)
+            quiz.putExtra("quiz_level", currentLevel)
+
+            startActivity(quiz)
         }
 
         //next 버튼
