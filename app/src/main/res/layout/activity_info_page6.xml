@@ -9,29 +9,122 @@
 
     <ImageButton
         android:id="@+id/backtomenubutton2"
-        android:layout_width="74dp"
-        android:layout_height="61dp"
+        android:layout_width="78dp"
+        android:layout_height="66dp"
         android:layout_marginBottom="62dp"
         android:background="?android:attr/selectableItemBackground"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11"
         app:srcCompat="@drawable/homebutton" />
 
 
     <TextView
-        android:layout_width="298dp"
-        android:layout_height="59dp"
+        android:id="@+id/textView5"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginBottom="8dp"
         android:autoLink="web"
-        android:text="Shortcut:https://engoo.com/app/materials/en
+        android:text="English Materials: https://engoo.com/app/materials/en"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginBottom="13dp"
+        android:autoLink="web"
+        android:text="Reading Comprehension Materials: https://www.k5learning.com/reading-comprehension-worksheets"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
-        Shortcut2:https://www.k5learning.com/reading-comprehension-worksheets"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-
-        app:layout_constraintRight_toRightOf="parent"
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="201dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginBottom="7dp"
+        android:autoLink="web"
+        android:text="Websites"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginBottom="7dp"
+        android:autoLink="web"
+        android:text="PDF"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginBottom="9dp"
+        android:autoLink="web"
+        android:text="Sample Grammar Lessons: https://drive.google.com/file/d/1m8Lx95v918rahV2vC70TwtpUFrRPmzX7/view?usp=sharing"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginBottom="10dp"
+        android:autoLink="web"
+        android:text="Reading Comprehension: https://drive.google.com/file/d/1YFZCBGFDpExj9NR42odgwYIt149wBpcB/view?usp=sharing"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView11"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginBottom="80dp"
+        android:autoLink="web"
+        android:text="Reading Comprehension Worksheet: https://drive.google.com/file/d/1YFZCBGFDpExj9NR42odgwYIt149wBpcB/view?usp=sharing"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toTopOf="@+id/backtomenubutton2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

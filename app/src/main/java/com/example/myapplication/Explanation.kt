@@ -36,7 +36,7 @@ class Explanation : AppCompatActivity() {
         levelButton1 = findViewById(R.id.levelExplanationButton1)
 
         levelButton1.setOnClickListener {
-            if (userLevel < 1){
+            if (userLevel <= 1){
                 Toast.makeText(this, "Must Finish Previous Levels", Toast.LENGTH_SHORT).show()
             } else {
                 val quizExplanation = Intent(this, QuizExplanation::class.java)
@@ -50,7 +50,7 @@ class Explanation : AppCompatActivity() {
         levelButton2 = findViewById(R.id.levelExplanationButton2)
 
         levelButton2.setOnClickListener {
-            if (userLevel < 2){
+            if (userLevel <= 2){
                 Toast.makeText(this, "Must Finish Previous Levels", Toast.LENGTH_SHORT).show()
             } else {
                 val quizExplanation = Intent(this, QuizExplanation::class.java)
@@ -62,7 +62,7 @@ class Explanation : AppCompatActivity() {
         levelButton3 = findViewById(R.id.levelExplanationButton3)
 
         levelButton3.setOnClickListener {
-            if (userLevel < 3){
+            if (userLevel <= 3){
                 Toast.makeText(this, "Must Finish Previous Levels", Toast.LENGTH_SHORT).show()
             } else {
                 val quizExplanation = Intent(this, QuizExplanation::class.java)
@@ -74,7 +74,7 @@ class Explanation : AppCompatActivity() {
         levelButton4 = findViewById(R.id.levelExplanationButton4)
 
         levelButton4.setOnClickListener {
-            if (userLevel < 4){
+            if (userLevel <= 4){
                 Toast.makeText(this, "Must Finish Previous Levels", Toast.LENGTH_SHORT).show()
             } else {
                 val quizExplanation = Intent(this, QuizExplanation::class.java)
@@ -86,7 +86,7 @@ class Explanation : AppCompatActivity() {
         levelButton5 = findViewById(R.id.levelExplanationButton5)
 
         levelButton5.setOnClickListener {
-            if (userLevel < 5){
+            if (userLevel <= 5){
                 Toast.makeText(this, "Must Finish Previous Levels", Toast.LENGTH_SHORT).show()
             } else {
                 val quizExplanation = Intent(this, QuizExplanation::class.java)

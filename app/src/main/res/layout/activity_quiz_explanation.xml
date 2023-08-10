@@ -7,14 +7,14 @@
     android:layout_height="match_parent"
     tools:context=".QuizExplanation">
 
+    <!-- level -->
     <ImageView
         android:id="@+id/explanationBox"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?android:attr/selectableItemBackground"
-        android:src="@drawable/level_box" />
+        android:src="@drawable/untitled_artwork" />
 
-    <!-- level -->
     <TextView
         android:id="@+id/quizExpLevel"
         android:layout_width="wrap_content"
@@ -24,7 +24,7 @@
         android:padding="5dp"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:text="Level"
         app:layout_constraintTop_toTopOf="@+id/explanationBox"
         app:layout_constraintLeft_toLeftOf="@+id/explanationBox"/>
@@ -41,7 +41,7 @@
         android:padding="10dp"
         android:text="dfghdfgdfgdfg"
         android:textColor="@color/black"
-        android:textSize="20dp"
+        android:textSize="15dp"
         app:layout_constraintTop_toBottomOf="@+id/quizExpLevel"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -58,7 +58,7 @@
         android:padding="10dp"
         android:text="Correct Answer is :"
         android:textColor="@color/black"
-        android:textSize="20dp"
+        android:textSize="15dp"
         app:layout_constraintTop_toBottomOf="@+id/questionExpText"
         app:layout_constraintStart_toStartOf="parent" />
 <!--    <RadioGroup-->
@@ -84,7 +84,7 @@
         android:padding="10dp"
         android:text="sdfsdfsdfsdf"
         android:textColor="@color/black"
-        android:textSize="20dp"
+        android:textSize="15dp"
         app:layout_constraintTop_toBottomOf="@+id/answerExpText"
         app:layout_constraintStart_toStartOf="parent" />
 

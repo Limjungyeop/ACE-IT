@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?android:attr/selectableItemBackground"
-        android:src="@drawable/level_box"
+        android:src="@drawable/untitled_artwork"
         tools:layout_editor_absoluteX="83dp"
         tools:layout_editor_absoluteY="206dp" />
 
