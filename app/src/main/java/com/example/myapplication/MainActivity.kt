@@ -23,23 +23,21 @@ class MainActivity : AppCompatActivity() {
         etname = findViewById(R.id.etname)
         etage = findViewById(R.id.etage)
         etcountry = findViewById(R.id.etcountry)
-        saveToRealtimeDatabase = findViewById<View>(R.id.saveToRealtimeDatabase) as ImageButton
-        startbutton = findViewById<View>(R.id.startbutton) as ImageButton
-        startbutton!!.setOnClickListener { openComicPage1() }
+
         databaseReference = FirebaseDatabase.getInstance().reference.child("Users")
+        saveToRealtimeDatabase = findViewById<View>(R.id.saveToRealtimeDatabase) as ImageButton
         saveToRealtimeDatabase!!.setOnClickListener { insertUserData() }
+
+        startbutton = findViewById<View>(R.id.startbutton) as ImageButton
+        startbutton!!.setOnClickListener { startActivity(Intent(this, ComicPage1::class.java)) }
     }
 
-    fun openComicPage1() {
-        val comicpage1 = Intent(this, ComicPage1::class.java)
-        startActivity(comicpage1)
-    }
 
     fun insertUserData() {
         val name = etname!!.text.toString()
         val age = etage!!.text.toString()
         val country = etcountry!!.text.toString()
-        val users = Users(name, age, country)
+        val users = Users(name, age, country) //Users activity에서 선언된 Users class사용
         databaseReference!!.push().setValue(users)
         Toast.makeText(this@MainActivity, "Data inserted!", Toast.LENGTH_SHORT).show()
     }

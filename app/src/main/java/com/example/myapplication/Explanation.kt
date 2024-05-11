@@ -2,10 +2,10 @@ package com.example.myapplication
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 
 class Explanation : AppCompatActivity() {
     var close_button: ImageButton? = null
@@ -36,63 +36,41 @@ class Explanation : AppCompatActivity() {
         levelButton1 = findViewById(R.id.levelExplanationButton1)
 
         levelButton1.setOnClickListener {
-            if (userLevel <= 1){
-                Toast.makeText(this, "Must Finish Previous Levels", Toast.LENGTH_SHORT).show()
-            } else {
-                val quizExplanation = Intent(this, QuizExplanation::class.java)
-                quizExplanation.putExtra("quiz_level", 1)
-                startActivity(quizExplanation)
-
-            }
+            openQuiz(1)
         }
 
         //button2 click
         levelButton2 = findViewById(R.id.levelExplanationButton2)
 
         levelButton2.setOnClickListener {
-            if (userLevel <= 2){
-                Toast.makeText(this, "Must Finish Previous Levels", Toast.LENGTH_SHORT).show()
-            } else {
-                val quizExplanation = Intent(this, QuizExplanation::class.java)
-                quizExplanation.putExtra("quiz_level", 2)
-                startActivity(quizExplanation)
-            }
+            openQuiz(2)
         }
         //button3 click
         levelButton3 = findViewById(R.id.levelExplanationButton3)
 
         levelButton3.setOnClickListener {
-            if (userLevel <= 3){
-                Toast.makeText(this, "Must Finish Previous Levels", Toast.LENGTH_SHORT).show()
-            } else {
-                val quizExplanation = Intent(this, QuizExplanation::class.java)
-                quizExplanation.putExtra("quiz_level", 3)
-                startActivity(quizExplanation)
-            }
+            openQuiz(3)
         }
         //button4 click
         levelButton4 = findViewById(R.id.levelExplanationButton4)
 
         levelButton4.setOnClickListener {
-            if (userLevel <= 4){
-                Toast.makeText(this, "Must Finish Previous Levels", Toast.LENGTH_SHORT).show()
-            } else {
-                val quizExplanation = Intent(this, QuizExplanation::class.java)
-                quizExplanation.putExtra("quiz_level", 4)
-                startActivity(quizExplanation)
-            }
+            openQuiz(4)
         }
         //button5 click
         levelButton5 = findViewById(R.id.levelExplanationButton5)
 
         levelButton5.setOnClickListener {
-            if (userLevel <= 5){
-                Toast.makeText(this, "Must Finish Previous Levels", Toast.LENGTH_SHORT).show()
-            } else {
-                val quizExplanation = Intent(this, QuizExplanation::class.java)
-                quizExplanation.putExtra("quiz_level", 5)
-                startActivity(quizExplanation)
-            }
+        openQuiz(5)
+        }
+    }
+    private fun openQuiz(checklevel:Int){
+        if (userLevel <= checklevel){
+            Toast.makeText(this, "Must Finish Previous Levels", Toast.LENGTH_SHORT).show()
+        } else {
+            val quizExplanation = Intent(this, QuizExplanation::class.java)
+            quizExplanation.putExtra("quiz_level", checklevel)
+            startActivity(quizExplanation)
         }
     }
 }

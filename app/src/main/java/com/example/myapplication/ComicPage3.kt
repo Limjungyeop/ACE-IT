@@ -18,7 +18,7 @@ class ComicPage3 : AppCompatActivity() {
             openComicPage2()
         }
         rightbutton3!!.setOnClickListener {
-            openComicPage4()
+            openMenu()
         }
     }
 
@@ -26,9 +26,9 @@ class ComicPage3 : AppCompatActivity() {
         val comicpage2 = Intent(this, ComicPage2::class.java)
         startActivity(comicpage2)
     }
-    fun openComicPage4() {
-        val comicpage4 = Intent(this, Menu::class.java)
-        startActivity(comicpage4)
+    fun openMenu() {
+        val menu = Intent(this, Menu::class.java)
+        startActivity(menu)
     }
 
 

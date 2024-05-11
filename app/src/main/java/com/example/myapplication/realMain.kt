@@ -1,11 +1,10 @@
 package com.example.myapplication
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
 import android.widget.ImageButton
+import androidx.appcompat.app.AppCompatActivity
 
 class realMain : AppCompatActivity() {
     var signupButton: ImageButton? = null
@@ -13,13 +12,9 @@ class realMain : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_real_main)
         signupButton = findViewById<View>(R.id.signupButton) as ImageButton
-        signupButton!!.setOnClickListener { openMain() }
+        signupButton!!.setOnClickListener { startActivity(Intent(this, MainActivity::class.java)) }
     }
 
-    fun openMain() {
-        val signIn = Intent(this, MainActivity::class.java)
-        startActivity(signIn)
-    }
 
 
 }

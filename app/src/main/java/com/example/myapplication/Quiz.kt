@@ -16,9 +16,17 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.database.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class Quiz : AppCompatActivity() {
+    companion object{
+        const val COUNTDOWN_DURATION: Long = 30000 // 타이머 시간 (30초)
+    }
+
     private lateinit var heart1: ImageView
     private lateinit var heart2: ImageView
     private lateinit var heart3: ImageView
@@ -28,14 +36,15 @@ class Quiz : AppCompatActivity() {
     private lateinit var answerGroup: RadioGroup
     private lateinit var checkButton: Button
     private lateinit var countDownTimer: CountDownTimer
+    private lateinit var optionQuiz : ImageButton
 
     private var currentLevelIndex: Int = 1 // 현재 레벨
-    private var currentQuestionIndex: Long = 0 // 현재 문제 번호
+    private var currentQuestionIndex: Int = 0 // 현재 문제 번호
     private var currentScore: Int = 0 //현재 스코어
-    private val countdownDuration: Long = 30000 // 타이머 시간 (30초)
-    private var remainingHearts = 3 // 남은 하트 개수
-    private var correctAnswer = ""
+    private var remainingHearts: Int = 3 // 남은 하트 개수
+    private var correctAnswer: String = ""
 
+//    private lateinit var questionSnapshot: DataSnapshot
     // Firebase Realtime Database 인스턴스와 참조
     private lateinit var database: FirebaseDatabase
     private lateinit var questionsRef: DatabaseReference
@@ -43,16 +52,9 @@ class Quiz : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz)
-        val imageButton = findViewById<ImageButton>(R.id.option_quiz)
-        imageButton.visibility = View.INVISIBLE
-
-
-
-        fun openComicPage1() {
-            val Menu = Intent(this, Menu::class.java)
-            startActivity(Menu)
-        }
-
+        //좌상단의 이미지 옵션으로 쓰려했으나 개발이 안되 숨김
+        optionQuiz = findViewById(R.id.option_quiz)
+        optionQuiz.visibility = View.INVISIBLE
         heart1 = findViewById(R.id.heart1)
         heart2 = findViewById(R.id.heart2)
         heart3 = findViewById(R.id.heart3)
@@ -74,13 +76,15 @@ class Quiz : AppCompatActivity() {
             currentLevelIndex = level
         }
         //level 표시하기
-        quizLevel.text = "Level " + level
+        val levelText = "Level $level"
+        this.quizLevel.text = levelText
 
         // 타이머 시작
         startTimer()
 
         // Firestore에서 문제 가져오기
         getQuestionFromDatabase()
+
 
         // 정답 확인 버튼 클릭 이벤트 처리
         checkButton.setOnClickListener {
@@ -89,57 +93,22 @@ class Quiz : AppCompatActivity() {
     }
     private fun getQuestionFromDatabase() {
         questionsRef.addListenerForSingleValueEvent(object : ValueEventListener {
+
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val nextQuestionSnapshot = dataSnapshot.child(currentLevelIndex.toString()).child((currentQuestionIndex + 1).toString())
-                if (nextQuestionSnapshot.exists()) {
-                    // 다음 문제가 존재하는 경우
+                var questionSnapshot = dataSnapshot.child(currentLevelIndex.toString()).child((currentQuestionIndex + 1).toString())
+                if (questionSnapshot.exists()) {
+                    //문제가 존재하는 경우
                     currentQuestionIndex++
                     answerGroup.tag = currentQuestionIndex
-
-                    val questionData = nextQuestionSnapshot.value as? Map<*, *>
+                    //문제표시
+                    val questionData = questionSnapshot.value as? Map<*, *>
                     if (questionData != null) {
                         val question = questionData["questionText"] as? String
                         questionText.text = question
-
-                        // 문제의 답변을 가져와서 RadioGroup에 추가합니다.
-                        val answers = questionData["answers"] as? List<Map<*, *>>
-                        if (answers != null) {
-                            answerGroup.removeAllViews() // 기존 답변 제거
-                            val inflater = LayoutInflater.from(this@Quiz)
-                            for (answer in answers) {
-                                val answerText = answer["text"] as? String
-                                val isCorrect = answer["isCorrect"] as? Boolean
-                                val radioButton =
-                                    inflater.inflate(R.layout.activity_quiz_radio, answerGroup, false) as RadioButton
-                                radioButton.text = answerText
-                                answerGroup.addView(radioButton)
-
-                                if (isCorrect == true) correctAnswer = answerText.toString()
-                            }
-                        }
+                        viewAnswerList(questionData)
                     }
                 } else {
-                    // 다음 문제가 없는 경우 (퀴즈 종료)
-//                    Toast.makeText(this@Quiz, "Quiz is complete", Toast.LENGTH_SHORT).show()
-                    //스코어 처리(한문제도 안틀렸을 경우 +10점)
-                    if (currentScore == 90){
-                        currentScore = 100
-                    }
-                    //level증가 후 저장
-                    currentLevelIndex++
-                    val sharedPreferences = getSharedPreferences("app_user", Context.MODE_PRIVATE  )
-                    val editor: SharedPreferences.Editor = sharedPreferences.edit()
-                    editor.putInt("level",currentLevelIndex)
-                    editor.commit()
-
-                    //스코어, 결과 문구 전달
-                    val resultPage = Intent(this@Quiz, Result::class.java)
-                    resultPage.putExtra("result_message", "GREAT JOB!")
-                    resultPage.putExtra("score", currentScore)
-                    resultPage.putExtra("quiz_level", currentLevelIndex-1)
-
-                    stopTimer()
-                    startActivity(resultPage)
+                    closeQuiz()
                 }
             }
 
@@ -148,18 +117,67 @@ class Quiz : AppCompatActivity() {
             }
         })
     }
+    //답변 표시
+    private fun viewAnswerList(questionData:Map<*, *>){
+            // 문제의 답변을 가져와서 RadioGroup에 추가합니다.
+            val answers = questionData["answers"] as? List<Map<*, *>>
+            if (answers != null) {
+                answerGroup.removeAllViews() // 기존 답변 제거
+                val inflater = LayoutInflater.from(this@Quiz)
+                for (answer in answers) {
+                    val radioButton = inflater.inflate(
+                        R.layout.activity_quiz_radio,
+                        answerGroup,
+                        false
+                    ) as RadioButton
 
+                    val answerText = answer["text"] as? String
+                    val isCorrect = answer["isCorrect"] as? Boolean
+
+                    radioButton.text = answerText
+                    answerGroup.addView(radioButton)
+
+                    if (isCorrect == true) correctAnswer = answerText.toString()
+                }
+            }
+    }
+    private fun closeQuiz() {
+        // 다음 문제가 없는 경우 (퀴즈 종료)
+        //Toast.makeText(this@Quiz, "Quiz is complete", Toast.LENGTH_SHORT).show()
+        //스코어 처리(한문제도 안틀렸을 경우 +10점)
+        if (currentScore == 90){
+            currentScore = 100
+        }
+        //userlevel 증가 및 저장
+        currentLevelIndex++
+        val sharedPreferences = getSharedPreferences("app_user", Context.MODE_PRIVATE  )
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+        editor.putInt("level",currentLevelIndex)
+        editor.apply()
+
+        //스코어, 결과 문구 전달
+        val resultPage = Intent(this@Quiz, Result::class.java)
+        resultPage.putExtra("result_message", "GREAT JOB!")
+        resultPage.putExtra("score", currentScore)
+        resultPage.putExtra("quiz_level", currentLevelIndex-1)
+
+        stopTimer()
+        startActivity(resultPage)
+    }
+    //타이머 시작 함수, 단위는 밀리초(1/1000초)
     private fun startTimer() {
-        countDownTimer = object : CountDownTimer(countdownDuration, 1000) {
+        countDownTimer = object : CountDownTimer(COUNTDOWN_DURATION, 1000) {
+            //지정된 주기(1000밀리초)마다 호출됨
             override fun onTick(millisUntilFinished: Long) {
                 val secondsRemaining = millisUntilFinished / 1000
                 timerText.text = "$secondsRemaining"
             }
 
+
             override fun onFinish() {
-                timerText.text = "Time's up"
-                // 시간이 끝났을 때 원하는 동작 추가 가능
-                // 스코어 결과 문구 전달
+                val finishText = "Time's up"
+                timerText.text = finishText
+                //정답을 맞히지 못하고 타이머가 종료된 경우
                 val resultPage = Intent(this@Quiz, Result::class.java)
                 resultPage.putExtra("result_message", "Try again")
                 resultPage.putExtra("quiz_level", currentLevelIndex)
@@ -169,7 +187,7 @@ class Quiz : AppCompatActivity() {
     }
 
     private fun stopTimer() {
-        countDownTimer?.cancel()
+        countDownTimer.cancel()
     }
     private fun checkAnswer() {
 //        countDownTimer.cancel() // 타이머 중지
@@ -178,13 +196,13 @@ class Quiz : AppCompatActivity() {
         if (selectedRadioButtonId != -1) {
             val selectedRadioButton = findViewById<RadioButton>(selectedRadioButtonId)
             val selectedAnswer = selectedRadioButton.text.toString()
-
+            //채점 구문
             if (selectedAnswer == correctAnswer) {
                 //스코어 추가
                 currentScore += 30
                 // 정답일 때의 동작 추가
                 Toast.makeText(this, "You are Correct!", Toast.LENGTH_SHORT).show()
-                countDownTimer.start() // 타이머 중지
+                countDownTimer.start() // 타이머 재시작
                 // 다음 문제 표시
                 getQuestionFromDatabase()
             } else {

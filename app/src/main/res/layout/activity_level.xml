@@ -14,8 +14,8 @@
         android:layout_height="match_parent"
         android:background="?android:attr/selectableItemBackground"
         android:src="@drawable/level_box"
-        tools:layout_editor_absoluteX="83dp"
-        tools:layout_editor_absoluteY="206dp" />
+        tools:layout_editor_absoluteX="101dp"
+        tools:layout_editor_absoluteY="0dp" />
 
     <ImageButton
         android:id="@+id/levelButton1"

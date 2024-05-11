@@ -3,12 +3,11 @@ package com.example.myapplication
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 
 class Result : AppCompatActivity() {
     private lateinit var nextButton: ImageButton
@@ -21,6 +20,7 @@ class Result : AppCompatActivity() {
 
     private var currentLevel: Int = 1 // 현재 레벨
     private var score: Int = 0
+    private var result: String? = ""
     private var totalscore: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +30,7 @@ class Result : AppCompatActivity() {
         val intent = intent
 
         // 결과 표시
-        val result : String? = intent.extras?.getString("result_message")
+        result = intent.extras?.getString("result_message")
         if(result != null){
             resultMessage = findViewById(R.id.resultMessage)
             resultMessage.text = result
@@ -48,12 +48,12 @@ class Result : AppCompatActivity() {
 
 
         // 저장된 total스코어 불러오기
-        val sharedPreferences1 = getSharedPreferences("app_user", Context.MODE_PRIVATE)
-        var totalScore = sharedPreferences1.getInt("total_score", 0)
+        val sharedPreferences = getSharedPreferences("app_user", Context.MODE_PRIVATE)
+        var totalScore = sharedPreferences.getInt("total_score", 0)
 
         // total스코어 증가 후 저장
         totalScore  += score
-        val sharedPreferences = getSharedPreferences("app_user", Context.MODE_PRIVATE  )
+
         val editor: SharedPreferences.Editor = sharedPreferences.edit()
         editor.putInt("total_score",totalScore)
         editor.commit()
@@ -73,7 +73,6 @@ class Result : AppCompatActivity() {
         retryButton = findViewById(R.id.retryButton)
 
         retryButton.setOnClickListener {
-
             val quiz = Intent(this, Quiz::class.java)
             quiz.putExtra("quiz_level", currentLevel)
 

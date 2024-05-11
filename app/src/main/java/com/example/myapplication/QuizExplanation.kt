@@ -1,20 +1,12 @@
 package com.example.myapplication
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.util.Log
 import android.view.View
-import android.widget.Button
 import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.RadioButton
-import android.widget.RadioGroup
 import android.widget.TextView
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -90,13 +82,14 @@ class QuizExplanation : AppCompatActivity() {
 
                     val questionData = nextQuestionSnapshot.value as? Map<*, *>
                     if (questionData != null) {
+                        //문제를 표시한다
                         val question = questionData["questionText"] as? String
                         questionText.text = question
-
+                        //문제해설을 표시한다.
                         val explanation = questionData["explanationText"] as? String
                         explanationText.text = explanation
 
-                        // 문제의 답변을 가져와서 RadioGroup에 추가합니다.
+                        // 문제의 답을 표시한다
                         val answers = questionData["answers"] as? List<Map<*, *>>
                         if (answers != null) {
                             for (answer in answers) {
